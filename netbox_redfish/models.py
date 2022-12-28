@@ -4,16 +4,17 @@ from django.urls import reverse
 from netbox.models import NetBoxModel
 
 class Redfish(NetBoxModel):
-
     device = models.OneToOneField(to="dcim.Device", on_delete=models.CASCADE, blank=True, null=True)
     ip = models.OneToOneField(to="ipam.IPAddress", on_delete=models.CASCADE, blank=True, null=True)
 
-    power_usage = models.PositiveSmallIntegerField(blank=True, null=True, help_text="Current power usage",editable=False)
-    power_state = models.CharField(blank=True, null=True, help_text="Current power state",editable=False,max_length=20,)
+    power_usage = models.PositiveSmallIntegerField(blank=True, null=True, help_text="Current power usage",
+                                                   editable=False)
+    power_state = models.CharField(blank=True, null=True, help_text="Current power state", editable=False,
+                                   max_length=20, )
 
-    health_ok = models.BooleanField(blank=True, null=True, help_text="Current health of the system",editable=False)
-    temp_cpu = models.FloatField(blank=True, null=True, help_text="CPU temperature",editable=False)
-    temp_mb = models.FloatField(blank=True, null=True, help_text="Motherboard temperature",editable=False)
+    health_ok = models.BooleanField(blank=True, null=True, help_text="Current health of the system", editable=False)
+    temp_cpu = models.FloatField(blank=True, null=True, help_text="CPU temperature", editable=False)
+    temp_mb = models.FloatField(blank=True, null=True, help_text="Motherboard temperature", editable=False)
 
     username = models.CharField(
         max_length=255,
@@ -25,7 +26,8 @@ class Redfish(NetBoxModel):
         blank=True
     )
 
-    allow_power_state_change = models.BooleanField(blank=True, null=True, help_text="Allow netbox to change the power state")
+    allow_power_state_change = models.BooleanField(blank=True, null=True,
+                                                   help_text="Allow netbox to change the power state")
 
     def get_power_usage(self):
         return self.power_usage
@@ -56,3 +58,5 @@ class Redfish(NetBoxModel):
 
     def get_absolute_url(self):
         return reverse('plugins:netbox_redfish:redfish_list', args=[self.pk])
+        # return reverse('dcim:device', args=[self.device.id])
+        # return reverse('dcim:device', current_app=self.request.resolver_match.namespace)

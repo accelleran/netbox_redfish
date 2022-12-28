@@ -19,16 +19,15 @@ def collect_info():
     logging.info("Start: Collecting Usage Information")
     results = []
     for device in devices:
-        try:
-            auth = coreapi.auth.BasicAuthentication(
-                username=device.redfish.username,
-                password=device.redfish.password
-            )
-            client = coreapi.Client(auth=auth)
-            schema = client.get('https://' + str(device.redfish.ip) + '/redfish/v1/Systems/System.Embeded.1')
-            xx = client.action(schema)
+        auth = coreapi.auth.BasicAuthentication(
+            username=device.redfish.username,
+            password=device.redfish.password
+        )
+        client = coreapi.Client(auth=auth)
+        schema = client.get('https://' + str(device.redfish.ip) + '/redfish/v1/Systems/System.Embeded.1')
+        xx = client.action(schema)
 
-
+        #todo
         Redfish.objects.update_or_create(device=device, defaults={"power_usage": xx})
 
         data = {device.name: data}
