@@ -1,0 +1,78 @@
+{% load humanize %}
+<div class="card card-default">
+    <div class="card-header">
+        <h5 class="">Redfish (OOB management)</h5>
+    </div>
+    <div class="card-body">
+        <h6 class="">Power</h6>
+        <table class="table table-hover attr-table">
+            <tbody>
+
+                <tr>
+                    <th>
+                        <span title="">Power Usage</span>
+                    </th>
+                    <td class="position-relative">
+                        <span>{{ redfish.get_power_usage }}</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <span title="">Power state</span>
+                    </th>
+                    <td class="position-relative">
+                        <span>{{ redfish.get_power_state }}</span>
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+
+        <h6 class="">Health and Temperatures</h6>
+
+        <table class="table table-hover attr-table">
+            <tbody>
+                <tr>
+                    <th>
+                        <span title="">Health</span>
+                    </th>
+                    <td class="position-relative">
+                        <span>{{ redfish.get_health }}</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <span title="">CPU Temperature</span>
+                    </th>
+                    <td class="position-relative">
+                        <span>{{ redfish.get_temp_cpu }}</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <span title="">Motherboard Temperature</span>
+                    </th>
+                    <td class="position-relative">
+                        <span>{{ redfish.get_temp_mb }}</span>
+                    </td>
+                </tr>
+
+
+
+            </tbody>
+        </table>
+    </div>
+
+    {% if redfish.get_allow_power_state_change == true %}
+    <div class="card-footer text-end noprint">
+          <a href="/extras/image-attachments/add/?content_type=9&amp;object_id=1" class="btn btn-warning btn-sm">
+            <i class="mdi mdi-power" aria-hidden="true"></i> Power cycle
+          </a>
+        </div>
+    {% endif %}
+
+</div>

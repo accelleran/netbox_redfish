@@ -1,0 +1,7 @@
+setup.py
+netbox_redfish/__init__.py
+netbox_redfish.egg-info/PKG-INFO
+netbox_redfish.egg-info/SOURCES.txt
+netbox_redfish.egg-info/dependency_links.txt
+netbox_redfish.egg-info/not-zip-safe
+netbox_redfish.egg-info/top_level.txt
